@@ -1,24 +1,19 @@
-// import 'background.js';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import BackgroundJob from 'react-native-background-job';
+import {
+  View,
+  Text,
+  StyleSheet
+} from 'react-native';
 
-const backgroundJob = {
-  jobKey: 'myJob',
-  job: () => console.log('Running in background'),
-};
-
-BackgroundJob.register(backgroundJob);
-
-var backgroundSchedule = {
-  jobKey: 'myJob',
-};
-
-BackgroundJob.schedule(backgroundSchedule)
-  .then(() => console.log('Success'))
-  .catch((err) => console.err(err));
-
-const App = () => {
+const App= () =>{
   return (
     <View style={styles.container}>
       <Text>Empty project</Text>
@@ -27,9 +22,9 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 30,
-  },
+  container:{
+    padding: 30
+  }
 });
 
 export default App;
