@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -46,6 +46,13 @@ const styles = StyleSheet.create({
 });
 
 const Signup = ({navigation}) => {
+  const [state, setState] = useState({username: '', password: '', email: ''});
+
+  const handleSubmit = () => {
+    console.log(state);
+    setState({username: '', password: '', email: ''});
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -63,11 +70,42 @@ const Signup = ({navigation}) => {
           }}>
           Signup
         </Text>
-        <TextInput placeholder="email" style={styles.input} />
-        <TextInput placeholder="username" style={styles.input} />
-        <TextInput placeholder="password" style={styles.input} />
+        <TextInput
+          placeholder="email"
+          style={styles.input}
+          onChangeText={(text) =>
+            setState({
+              ...state,
+              email: text,
+            })
+          }
+          value={state.email}
+        />
+        <TextInput
+          placeholder="username"
+          style={styles.input}
+          onChangeText={(text) =>
+            setState({
+              ...state,
+              username: text,
+            })
+          }
+          value={state.username}
+        />
+        <TextInput
+          placeholder="password"
+          style={styles.input}
+          secureTextEntry={true}
+          onChangeText={(text) =>
+            setState({
+              ...state,
+              password: text,
+            })
+          }
+          value={state.password}
+        />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
           <Text style={styles.center}>Signup</Text>
         </TouchableOpacity>
 

@@ -21,8 +21,8 @@ const screenOptions = {
 const authStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="signup" component={Signup} />
     </Stack.Navigator>
   );
@@ -42,8 +42,8 @@ export const Navigator = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen name="Second" component={pageStack} />
         <Drawer.Screen name="Main" component={authStack} />
+        <Drawer.Screen name="Second" component={pageStack} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
