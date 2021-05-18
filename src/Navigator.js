@@ -31,9 +31,9 @@ const authStack = () => {
 const pageStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="guide" component={Guide} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
       <Stack.Screen name="profile" component={Profile} />
-      <Stack.Screen name="guide" component={Guide} />
     </Stack.Navigator>
   );
 };
@@ -42,8 +42,8 @@ export const Navigator = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen name="Main" component={authStack} />
         <Drawer.Screen name="Second" component={pageStack} />
+        <Drawer.Screen name="Main" component={authStack} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
