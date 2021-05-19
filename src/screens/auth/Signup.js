@@ -65,7 +65,16 @@ const Signup = ({navigation}) => {
             .doc(uid)
             .set(data)
             .then(() => {
-                navigation.navigate('Home', {user: data})
+              navigation.reset({
+                key: null,
+                index: 0,
+                routes: [{name: 'Page'}],
+              });
+              AsyncStorage.setItem('authState', 'authenticated').then(() => {
+                  console.log('Authstate not null');
+              }).catch(()=>{
+                console.log("error")
+              })
             })
             .catch((error) => {
                 alert(error)

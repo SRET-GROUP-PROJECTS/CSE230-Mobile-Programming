@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'cover',
     height: 60,
+    elevation:4
   },
   headerContainer: {
     height: 60,

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     width: '100%',
-    height: 100,
+    height: 80,
     resizeMode: 'cover',
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,

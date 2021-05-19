@@ -53,14 +53,13 @@ const Login = ({navigation}) => {
   useEffect(() => {}, []);
 
   const handleSubmit = () => {
-    // navigation.navigate('Page');
     navigation.reset({
       key: null,
       index: 0,
       routes: [{name: 'Page'}],
     });
     AsyncStorage.setItem('authState', 'authenticated').then(() => {
-      console.log('Authstate not null');
+        console.log('Authstate not null');
     });
     // firebase
     //   .auth()
@@ -84,8 +83,14 @@ const Login = ({navigation}) => {
     //           .catch(() => {
     //             console.log('user data not stored');
     //           });
-    //         // navigation.navigate('profile');
-    //         navigation.navigate('Profile', { screen: 'profile' });
+    //           navigation.reset({
+    //             key: null,
+    //             index: 0,
+    //             routes: [{name: 'Page'}],
+    //           });
+    //           AsyncStorage.setItem('authState', 'authenticated').then(() => {
+    //               console.log('Authstate not null');
+    //           });
     //       })
     //       .catch((error) => {
     //         alert(error);
