@@ -131,7 +131,7 @@ export const Navigator = () => {
   if (!loading) {
     return (
       <NavigationContainer>
-        {authState ? (
+        {1 ? (
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Page" children={PageDrawer} />
             <Stack.Screen name="Auth" component={AuthStack} />

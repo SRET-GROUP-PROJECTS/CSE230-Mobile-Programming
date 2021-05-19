@@ -9,7 +9,7 @@ const ViewDetails = ({navigation, route}) => {
 
   if (venues) {
     return (
-      <View style={{padding: 20}}>
+      <View style={{padding: 20,backgroundColor:'F4F8FA'}}>
         <Text
           style={{
             padding: 20,
@@ -21,10 +21,26 @@ const ViewDetails = ({navigation, route}) => {
         </Text>
         <ScrollView>
           {venues.venues.centers.map((center,index) => {
+            console.log(center);
+
             return (
               <View style={styles.card} key={index}>
                 <Text style={styles.text}>{center.name}</Text>
                 <Text style={styles.bodyText}>{center.address}</Text>
+               {center.fee_type=="PAID"?<View>
+                 <Text>{center.fee_type}</Text>
+                 <Text>{center.vaccine_fees[fee]}</Text>
+               </View>:<Text></Text>}
+                {center.sessions.map((session,index)=>{
+                  return (
+                    <View>
+                    <Text>{session.vaccine}</Text>
+                    <Text>{session.min_age_limit}</Text>
+                    <Text>{session.available_capacity_dose1}</Text>
+                    <Text>{session.available_capacity_dose2}</Text>
+                  </View>
+                  );
+                })}
               </View>
             );
           })}
@@ -38,6 +54,7 @@ const ViewDetails = ({navigation, route}) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
+          backgroundColor:'F4F8FA'
         }}>
         <Spinner
           visible={loading}
@@ -60,7 +77,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     paddingVertical: 20,
     paddingHorizontal: 20,
-    elevation: 4,
+    elevation: 10,
     width: "80%",
     alignSelf:'center'
   },
