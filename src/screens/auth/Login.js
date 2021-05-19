@@ -12,6 +12,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BG from '../../images/image.png';
+import axios from 'axios';
 
 const styles = StyleSheet.create({
   container: {
@@ -50,17 +51,30 @@ const styles = StyleSheet.create({
 
 const Login = ({navigation}) => {
   const [state, setState] = useState({username: '', password: ''});
-  useEffect(() => {}, []);
-
+  
   const handleSubmit = () => {
-    navigation.reset({
-      key: null,
-      index: 0,
-      routes: [{name: 'Page'}],
-    });
-    AsyncStorage.setItem('authState', 'authenticated').then(() => {
-        console.log('Authstate not null');
-    });
+
+    axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBDYsd7spbSDvdO_eclV8iH_iAqEa1LS4Q", {
+        email: state.username,
+        password: state.password,
+        returnSecureToken:true
+    }).then(res=>{
+      AsyncStorage.setItem('authCredentials', res.data)
+      AsyncStorage.setItem('authState', 'authenticated').then(() => {
+          console.log('Authstate not null');
+      }).catch(err=>{
+        alert(err);
+      })
+      navigation.reset({
+        key: null,
+        index: 0,
+        routes: [{name: 'Page'}],
+      });
+  
+    }).catch(err => {
+      alert(err);
+    })
+    
     // firebase
     //   .auth()
     //   .signInWithEmailAndPassword(state.username, state.password)

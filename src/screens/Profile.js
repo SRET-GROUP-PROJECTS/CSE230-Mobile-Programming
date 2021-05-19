@@ -24,7 +24,7 @@ const Profile = () => {
   const female = require('../images/femenine.png');
   //   const ProfileImg = require('./assets/profile_vector.png');
 
-  const [state, setState] = useState({username:'',email: '',phoneNum:'',age: '',gender:0}); 
+  const [state, setState] = useState({username:'john',email: 'john@gmail.com',phoneNum:'',age: '',gender:0}); 
 
   const [image, setImage] = useState(
     'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
@@ -227,7 +227,6 @@ const Profile = () => {
               marginTop: 10
             }}
             onPress={()=>{
-            
               if(edit){
                 onSave()
               }

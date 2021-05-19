@@ -103,8 +103,8 @@ const EmergencyStack = () => {
 const PageDrawer = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Guide" component={GuideStack} />
       <Drawer.Screen name="Dashboard" component={DashboardStack} />
+      <Drawer.Screen name="Guide" component={GuideStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Emergency" component={EmergencyStack} />
     </Drawer.Navigator>

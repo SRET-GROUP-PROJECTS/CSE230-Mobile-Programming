@@ -14,19 +14,24 @@ const {height, width} = Dimensions.get('window');
 const DATA = [
   {
     id: "1",
-    url: "https://images.unsplash.com/photo-1614204424926-196a80bf0be8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    name: "Chandler Bing"
+    url: "https://www.atsociety.org.uk/wp-content/uploads/2019/11/Helpline.png",
+    name: "011-23978046 or 1075"
   },
   {
     id: "2",
-    url: "https://images.unsplash.com/photo-1614204424926-196a80bf0be8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    url: "https://englishtribuneimages.blob.core.windows.net/gallary-content/2021/4/Desk/2021_4$largeimg_1438667766.jpg",
     
-    name: "Monica Geller"
+    name: "TN: 044-29510500"
   },
   {
     id: "3",
-    url: "https://images.unsplash.com/photo-1614204424926-196a80bf0be8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    name: "Joey Tribbiani"
+    url: "https://pbs.twimg.com/profile_images/1383992823003815936/Aj-yhJb2_400x400.jpg",
+    name: "1800-111-747"
+  },
+  {
+    id: "4",
+    url: "https://goop-img.com/wp-content/uploads/2020/03/how-to-help-covid-19-shutterstock_1440974273-1.jpg",
+    name: "022-22027990"
   },
  
 ]
@@ -55,7 +60,7 @@ const Emergency = () => {
       </View>
       <TouchableOpacity style={styles.add_contact_button}>
         <Text style={{color: '#F4F8FA', fontSize: 16, fontWeight: 'bold'}}>
-          Add Contact
+          COVID HELPLINE INDIA
         </Text>
       </TouchableOpacity>
     </View>
