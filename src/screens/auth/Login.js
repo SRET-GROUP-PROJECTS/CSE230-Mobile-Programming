@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {firebase} from '../../firebase/config';
 import {
   View,
   Text,
@@ -7,6 +8,8 @@ import {
   TextInput,
   ImageBackground,
 } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BG from '../../images/image.png';
 
@@ -47,9 +50,45 @@ const styles = StyleSheet.create({
 
 const Login = ({navigation}) => {
   const [state, setState] = useState({username: '', password: ''});
+  useEffect(() => {}, []);
 
   const handleSubmit = () => {
-    console.log(state);
+    navigation.navigate('profile');
+    AsyncStorage.setItem('authState', 'authenticated').then(() => {
+      console.log('Authstate not null');
+    });
+    // firebase
+    //   .auth()
+    //   .signInWithEmailAndPassword(state.username, state.password)
+    //   .then((response) => {
+    //     const uid = response.user.uid;
+    //     const usersRef = firebase.firestore().collection('users');
+    //     usersRef
+    //       .doc(uid)
+    //       .get()
+    //       .then((firestoreDocument) => {
+    //         if (!firestoreDocument.exists) {
+    //           alert('User does not exist anymore.');
+    //           return;
+    //         }
+    //         const user = firestoreDocument.data();
+    //         AsyncStorage.setItem('user', JSON.stringify(user))
+    //           .then(() => {
+    //             console.log('user data stored');
+    //           })
+    //           .catch(() => {
+    //             console.log('user data not stored');
+    //           });
+    //         // navigation.navigate('profile');
+    //         navigation.navigate('Profile', { screen: 'profile' });
+    //       })
+    //       .catch((error) => {
+    //         alert(error);
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     alert(error);
+    //   });
     setState({username: '', password: ''});
   };
 
@@ -71,7 +110,7 @@ const Login = ({navigation}) => {
           Login
         </Text>
         <TextInput
-          placeholder="username"
+          placeholder="Email"
           style={styles.input}
           onChangeText={(text) =>
             setState({
@@ -82,7 +121,7 @@ const Login = ({navigation}) => {
           value={state.username}
         />
         <TextInput
-          placeholder="password"
+          placeholder="Password"
           style={styles.input}
           secureTextEntry={true}
           onChangeText={(text) =>

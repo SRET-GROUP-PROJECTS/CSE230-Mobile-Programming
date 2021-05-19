@@ -7,7 +7,7 @@ import {
   TextInput,
   ImageBackground,
 } from 'react-native';
-
+import {firebase} from '../../firebase/config';
 import BG from '../../images/image.png';
 
 const styles = StyleSheet.create({
@@ -46,11 +46,35 @@ const styles = StyleSheet.create({
 });
 
 const Signup = ({navigation}) => {
-  const [state, setState] = useState({username: '', password: '', email: ''});
+  const [state, setState] = useState({username:'',password: '', email: ''});
+  
 
   const handleSubmit = () => {
-    console.log(state);
-    setState({username: '', password: '', email: ''});
+    firebase
+    .auth()
+    .createUserWithEmailAndPassword(state.email, state.password)
+    .then((response) => {
+        const uid = response.user.uid
+        const data = {
+            id: uid,
+            email:state.email,
+            username:state.username,
+        };
+        const usersRef = firebase.firestore().collection('users')
+        usersRef
+            .doc(uid)
+            .set(data)
+            .then(() => {
+                navigation.navigate('Home', {user: data})
+            })
+            .catch((error) => {
+                alert(error)
+            });
+    })
+    .catch((error) => {
+        alert(error)
+});
+    setState({username:'',password: '', email: ''});
   };
 
   return (
@@ -71,18 +95,7 @@ const Signup = ({navigation}) => {
           Signup
         </Text>
         <TextInput
-          placeholder="email"
-          style={styles.input}
-          onChangeText={(text) =>
-            setState({
-              ...state,
-              email: text,
-            })
-          }
-          value={state.email}
-        />
-        <TextInput
-          placeholder="username"
+          placeholder="Username"
           style={styles.input}
           onChangeText={(text) =>
             setState({
@@ -93,7 +106,18 @@ const Signup = ({navigation}) => {
           value={state.username}
         />
         <TextInput
-          placeholder="password"
+          placeholder="Email"
+          style={styles.input}
+          onChangeText={(text) =>
+            setState({
+              ...state,
+              email: text,
+            })
+          }
+          value={state.email}
+        />
+        <TextInput
+          placeholder="Password"
           style={styles.input}
           secureTextEntry={true}
           onChangeText={(text) =>

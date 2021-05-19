@@ -19,6 +19,9 @@ const Profile = () => {
   const female = require('../images/femenine.png');
   //   const ProfileImg = require('./assets/profile_vector.png');
   const [gender, genderState] = useState(0);
+  const saveHandler=()=>{
+
+  }
   return (
     <View
       style={{backgroundColor: 'white', flex: 1, justifyContent: 'flex-start'}}>
@@ -34,7 +37,6 @@ const Profile = () => {
             height: HEIGHT * 0.18,
             paddingVertical: 20,
           }}>
-          {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} > */}
           <Text style={{color: '#fefe', fontWeight: '500', paddingTop: 20}}>
             Welcome
           </Text>
@@ -64,6 +66,7 @@ const Profile = () => {
             placeholderTextColor="grey"
             style={styles.textInput}
             multiline={true}
+            defaultValue="name"
             maxLength={165}
             onChangeText={(text) => {
               console.log(text);
