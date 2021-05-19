@@ -1,9 +1,8 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {View} from 'react-native'
-
+import {View} from 'react-native';
 
 import Login from './screens/auth/Login';
 import Signup from './screens/auth/Signup';
@@ -13,6 +12,7 @@ import Profile from './screens/Profile';
 import Dashboard from './screens/Dashboard';
 import Guide from './screens/guidelines';
 import Emergency from './screens/emergency';
+import ViewDetails from './screens/ViewDetails';
 
 import Header from './screens/components/header';
 
@@ -63,7 +63,6 @@ const ProfileStack = () => {
             header: () => <Header navigation={navigation} title="COVAC" />,
           };
         }}
-        l̥
       />
     </Stack.Navigator>
   );
@@ -81,6 +80,7 @@ const DashboardStack = () => {
           };
         }}
       />
+      <Stack.Screen name="viewDetails" component={ViewDetails} />
     </Stack.Navigator>
   );
 };
@@ -111,49 +111,58 @@ const PageDrawer = () => {
   );
 };
 
-
 export const Navigator = () => {
   const [authState, setAuthState] = useState(false);
   const [loading, setLoading] = useState(true);
-  useEffect(() =>{
-    AsyncStorage.getItem("authState").then(res=>res).then(res =>{
-      console.log(res)
-      if(res=="authenticated"){
-        setAuthState(true)
-      }else{
-        setAuthState(false)
-      }
-      setLoading(false)
-    })
-  },[])
+  useEffect(() => {
+    AsyncStorage.getItem('authState')
+      .then((res) => res)
+      .then((res) => {
+        console.log(res);
+        if (res == 'authenticated') {
+          setAuthState(true);
+        } else {
+          setAuthState(false);
+        }
+        setLoading(false);
+      });
+  }, []);
 
-  if(!loading){
+  if (!loading) {
     return (
       <NavigationContainer>
-        {authState?
+        {authState ? (
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Page" children={PageDrawer} />
             <Stack.Screen name="Auth" component={AuthStack} />
-          </Stack.Navigator>:
+          </Stack.Navigator>
+        ) : (
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Auth" component={AuthStack} />
             <Stack.Screen name="Page" children={PageDrawer} />
-          </Stack.Navigator>}
+          </Stack.Navigator>
+        )}
       </NavigationContainer>
     );
-  }
-  else{
-    return <View style={{flexDirection: 'row',justifyContent: 'center',alignItems:'center'}}>
-      <Spinner
-        visible={loading}
-        // textContent={'Loading...'}
-        // textStyle={{color: colors.text}}
-        // overlayColor={colors.background}
-        // cancelable={false}
-        // color={colors.text}
-        animation="fade"
-      />
-    </View>
+  } else {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Spinner
+          visible={loading}
+          // textContent={'Loading...'}
+          // textStyle={{color: colors.text}}
+          // overlayColor={colors.background}
+          // cancelable={false}
+          // color={colors.text}
+          animation="fade"
+        />
+      </View>
+    );
   }
 };
 
