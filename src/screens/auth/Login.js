@@ -53,7 +53,12 @@ const Login = ({navigation}) => {
   useEffect(() => {}, []);
 
   const handleSubmit = () => {
-    navigation.navigate('profile');
+    // navigation.navigate('Page');
+    navigation.reset({
+      key: null,
+      index: 0,
+      routes: [{name: 'Page'}],
+    });
     AsyncStorage.setItem('authState', 'authenticated').then(() => {
       console.log('Authstate not null');
     });

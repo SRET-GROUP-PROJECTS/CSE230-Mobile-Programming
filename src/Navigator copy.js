@@ -23,34 +23,34 @@ const screenOptions = {
   headerShown: false,
 };
 
+const screens = {
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: ({navigation}) => {
+      return {
+        headerTitle: () => <Header navigation={navigation} title="CoVac" />,
+      };
+    },
+  },
+  Guidelines: {
+    screen: Guide,
+    navigationOptions: {
+      title: 'Guidelines',
+    },
+  },
+};
+
 const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="signup" component={Signup} />
     </Stack.Navigator>
   );
 };
 
-const GuideStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="guide"
-        component={Guide}
-        options={({navigation}) => {
-          return {
-            header: () => <Header navigation={navigation} title="COVAC" />,
-          };
-        }}
-        l̥
-      />
-    </Stack.Navigator>
-  );
-};
-
-const ProfileStack = () => {
+const PageStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -63,13 +63,15 @@ const ProfileStack = () => {
         }}
         l̥
       />
-    </Stack.Navigator>
-  );
-};
-
-const DashboardStack = () => {
-  return (
-    <Stack.Navigator>
+      <Stack.Screen
+        name="guide"
+        component={Guide}
+        options={({navigation}) => {
+          return {
+            header: () => <Header navigation={navigation} title="COVAC" />,
+          };
+        }}
+      />
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
@@ -80,16 +82,6 @@ const DashboardStack = () => {
         }}
       />
     </Stack.Navigator>
-  );
-};
-
-const PageDrawer = () => {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Guide" component={GuideStack} />
-      <Drawer.Screen name="Dashboard" component={DashboardStack} />
-      <Drawer.Screen name="Profile" component={ProfileStack} />
-    </Drawer.Navigator>
   );
 };
 
@@ -108,7 +100,7 @@ export const Navigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Auth" component={AuthStack} />
-        <Stack.Screen name="Page" children={PageDrawer} />
+        <Stack.Screen name="Page" children={PageStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );

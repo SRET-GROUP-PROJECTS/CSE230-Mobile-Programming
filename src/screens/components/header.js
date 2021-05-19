@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import Ham from '../../images/ham.png';
 
+import { DrawerActions } from '@react-navigation/native';
+
 export default function Header({navigation, title}) {
   const openMenu = () => {
-    navigation.openDrawer();
+    navigation.dispatch(DrawerActions.toggleDrawer());
   };
 
   return (

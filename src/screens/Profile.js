@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import React, {Component, useState} from 'react';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
@@ -164,7 +166,11 @@ const Profile = () => {
               alignItems: 'center',
               justifyContent: 'center',
               marginTop: 10
-            }}>
+            }}
+            onPress={()=>{
+              AsyncStorage.setItem("authState","null")
+            }}
+            >
             <View
               style={{
                 paddingHorizontal: 30,
