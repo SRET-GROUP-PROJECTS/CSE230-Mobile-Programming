@@ -7,52 +7,56 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import React, {useState} from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 var flag = 0;
-const Profile = () => {
+const Profile = ({navigation}) => {
   const male = require('../images/male.png');
   const female = require('../images/femenine.png');
   //   const ProfileImg = require('./assets/profile_vector.png');
 
-  const [state, setState] = useState({username:'john',email: 'john@gmail.com',phoneNum:'',age: '',gender:0}); 
+  const [state, setState] = useState({
+    username: 'john',
+    email: 'john@gmail.com',
+    phoneNum: '',
+    age: '',
+    gender: 0,
+  });
 
   const [image, setImage] = useState(
     'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
   );
 
-  const [edit, setEdit] = useState(false)
+  const [edit, setEdit] = useState(false);
 
   const Upload = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true
-    }).then((image) => {
-      setImage(image.path);
-      console.log(image);
+      cropping: true,
     })
-    .catch((error) => console.log(error));
-  }
+      .then((image) => {
+        setImage(image.path);
+        console.log(image);
+      })
+      .catch((error) => console.log(error));
+  };
 
-  const onSave=()=>{
-       
+  const onSave = () => {
     setEdit(!edit);
-  }
+  };
 
   return (
     <View
       style={{backgroundColor: 'white', flex: 1, justifyContent: 'flex-start'}}>
-      <ScrollView style={{flex: 1,marginBottom:40}}>
+      <ScrollView style={{flex: 1, marginBottom: 40}}>
         {/* <View style={{ borderColor: "#1464F4", borderTopWidth: 0.5 }} /> */}
 
         <View
@@ -64,12 +68,36 @@ const Profile = () => {
             height: HEIGHT * 0.18,
             paddingVertical: 20,
           }}>
-          <Text style={{color: '#fefe', fontWeight: '500', paddingTop: 20}}>
-            Welcome
-          </Text>
-          <Text style={{color: 'white', fontWeight: 'bold', paddingBottom: 20}}>
-            King Kong
-          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <View>
+              <Text style={{color: '#fefe', fontWeight: '500', paddingTop: 20}}>
+                Welcome
+              </Text>
+              <Text
+                style={{color: 'white', fontWeight: 'bold', paddingBottom: 20}}>
+                King Kong
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                AsyncStorage.setItem('authState', 'null');
+                navigation.reset({
+                  key: null,
+                  index: 0,
+                  routes: [{name: 'Auth'}],
+                });
+              }}>
+              <Text
+                style={{color: '#fefefe', fontWeight: '500', paddingTop: 20}}>
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.backButton}>
             <View
               style={{
@@ -86,17 +114,46 @@ const Profile = () => {
           {/* </LinearGradient> */}
         </View>
         {/* <View style={{ borderColor: "#1464F4", borderTopWidth: 0.5 }} /> */}
-        <View style={{paddingTop: 20,paddingHorizontal:20}}>
-          <View style={{flexDirection: 'row',justifyContent: 'center'}}>
-            <View  style={{ justifyContent: "center", alignItems: "center" ,marginTop:40, borderRadius: 100,backgroundColor:'pink',height:80,width:80,flexDirection:'row'}}>
-              <ImageBackground source={{uri:image}} style={{ width: 80, height: 80, borderRadius: 50,flexDirection:'column',justifyContent: 'flex-end',alignItems: 'center',paddingBottom:4}} >
-                <TouchableOpacity onPress={Upload} style={{ backgroundColor:"rgba(0,0,0,0.7)",borderBottomRightRadius:50,borderBottomLeftRadius:50,flexDirection:"row",justifyContent:'center',width: 55,}}>
-                  {edit&&<Text style={{color:"white"}}>Edit</Text>}
+        <View style={{paddingTop: 20, paddingHorizontal: 20}}>
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 40,
+                borderRadius: 100,
+                backgroundColor: 'pink',
+                height: 80,
+                width: 80,
+                flexDirection: 'row',
+              }}>
+              <ImageBackground
+                source={{uri: image}}
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: 50,
+                  flexDirection: 'column',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                  paddingBottom: 4,
+                }}>
+                <TouchableOpacity
+                  onPress={Upload}
+                  style={{
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    borderBottomRightRadius: 50,
+                    borderBottomLeftRadius: 50,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    width: 55,
+                  }}>
+                  {edit && <Text style={{color: 'white'}}>Edit</Text>}
                 </TouchableOpacity>
               </ImageBackground>
             </View>
           </View>
-      
+
           <Text style={styles.label}>Name</Text>
           <TextInput
             editable={edit}
@@ -108,9 +165,9 @@ const Profile = () => {
             value={state.username}
             onChangeText={(text) => {
               setState({
-                 ...state,
-                 username:text
-              })
+                ...state,
+                username: text,
+              });
             }}
           />
           <Text style={styles.label}>Email</Text>
@@ -122,15 +179,14 @@ const Profile = () => {
             multiline={true}
             maxLength={165}
             value={state.email}
-            
             onChangeText={(text) => {
               setState({
                 ...state,
-                email:text
-             })
+                email: text,
+              });
             }}
           />
-          
+
           <Text style={styles.label}>Phone number</Text>
           <TextInput
             editable={edit}
@@ -143,8 +199,8 @@ const Profile = () => {
             onChangeText={(text) => {
               setState({
                 ...state,
-                phoneNum:text
-             })
+                phoneNum: text,
+              });
             }}
           />
           <Text style={styles.label}>Gender</Text>
@@ -156,10 +212,11 @@ const Profile = () => {
             }}>
             <TouchableOpacity
               onPress={() => {
-                edit && setState({
-                  ...state,
-                  gender:1
-                })
+                edit &&
+                  setState({
+                    ...state,
+                    gender: 1,
+                  });
               }}>
               <View
                 style={{
@@ -168,7 +225,11 @@ const Profile = () => {
                   backgroundColor: '#F0F8FF',
                   marginRight: 20,
                   borderColor:
-                    state.gender == 0 ? null : state.gender == 1 ? '#49abc3' : null,
+                    state.gender == 0
+                      ? null
+                      : state.gender == 1
+                      ? '#49abc3'
+                      : null,
                   borderWidth: state.gender == 1 ? 1 : 0,
                   borderRadius: 8,
                 }}>
@@ -178,11 +239,11 @@ const Profile = () => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-
-                edit && setState({
-                  ...state,
-                  gender:2
-                })
+                edit &&
+                  setState({
+                    ...state,
+                    gender: 2,
+                  });
               }}>
               <View
                 style={{
@@ -191,7 +252,11 @@ const Profile = () => {
                   backgroundColor: '#F0F8FF',
                   marginRight: 10,
                   borderColor:
-                    state.gender == 0 ? null : state.gender == 2 ? '#49abc3' : null,
+                    state.gender == 0
+                      ? null
+                      : state.gender == 2
+                      ? '#49abc3'
+                      : null,
                   borderWidth: state.gender == 2 ? 1 : 0,
                   borderRadius: 8,
                 }}>
@@ -215,7 +280,7 @@ const Profile = () => {
               maxLength={165}
               value={state.age}
               onChangeText={(text) => {
-                setState({...state, age: text})
+                setState({...state, age: text});
               }}
             />
           </View>
@@ -224,17 +289,15 @@ const Profile = () => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
-              marginTop: 10
+              marginTop: 10,
             }}
-            onPress={()=>{
-              if(edit){
-                onSave()
+            onPress={() => {
+              if (edit) {
+                onSave();
+              } else {
+                setEdit(!edit);
               }
-              else{
-                setEdit(!edit)
-              }
-            }}
-            >
+            }}>
             <View
               style={{
                 paddingHorizontal: 30,
@@ -243,7 +306,15 @@ const Profile = () => {
                 width: 100,
                 borderRadius: 10,
               }}>
-                 <Text style={{ color: "white", fontSize: 15,textAlign: 'center',fontWeight: "bold"}}>{edit ? "Save" : "Edit"}</Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 15,
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                }}>
+                {edit ? 'Save' : 'Edit'}
+              </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -264,7 +335,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     backgroundColor: '#fefefe',
-    opacity:0.5,
+    opacity: 0.5,
     borderColor: 'grey',
     borderWidth: 1,
     height: 40,
@@ -286,7 +357,7 @@ const styles = StyleSheet.create({
     width: 130,
     height: 50,
     flexDirection: 'row',
-    elevation: 4
+    elevation: 4,
   },
   backText: {
     paddingRight: 25,
