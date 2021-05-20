@@ -108,7 +108,7 @@ const Dashboard = ({navigation}) => {
               open={openState}
               value={StateId}
               items={states}
-              zIndex={20}
+              zIndex={100}
               setOpen={setOpenState}
               setValue={setStateId}
               setItems={setStates}
@@ -120,7 +120,7 @@ const Dashboard = ({navigation}) => {
               open={openDistrict}
               value={districtId}
               items={district}
-              zIndex={20}
+              zIndex={100}
               setOpen={setOpenDistrict}
               setValue={setDistrictId}
               setItems={setDistrict}

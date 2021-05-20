@@ -67,9 +67,9 @@ const Profile = () => {
           <Text style={{color: '#fefe', fontWeight: '500', paddingTop: 20}}>
             Welcome
           </Text>
-          <Text style={{color: 'white', fontWeight: 'bold', paddingBottom: 20}}>
+          {/* <Text style={{color: 'white', fontWeight: 'bold', paddingBottom: 20}}>
             King Kong
-          </Text>
+          </Text> */}
           <View style={styles.backButton}>
             <View
               style={{
@@ -226,7 +226,8 @@ const Profile = () => {
               justifyContent: 'center',
               marginTop: 10
             }}
-            onPress={()=>{
+            onPress={() => {
+              // AsyncStorage.setItem("authState","null")
               if(edit){
                 onSave()
               }

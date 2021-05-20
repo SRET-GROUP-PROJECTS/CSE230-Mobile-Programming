@@ -5,7 +5,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const ViewDetails = ({navigation, route}) => {
   const [venues, setVenues] = useState({venues: route.params.venue});
-  console.log(venues);
+  // console.log(venues);
 
   if (venues) {
     if (venues.venues.centers.length == 0) {
