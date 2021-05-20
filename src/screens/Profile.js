@@ -23,8 +23,8 @@ const Profile = ({navigation}) => {
   //   const ProfileImg = require('./assets/profile_vector.png');
 
   const [state, setState] = useState({
-    username: 'john',
-    email: 'john@gmail.com',
+    username: 'Robert',
+    email: 'robert@gmail.com',
     phoneNum: '',
     age: '',
     gender: 0,
@@ -80,7 +80,7 @@ const Profile = ({navigation}) => {
               </Text>
               <Text
                 style={{color: 'white', fontWeight: 'bold', paddingBottom: 20}}>
-                King Kong
+                {state.username}
               </Text>
             </View>
             <TouchableOpacity

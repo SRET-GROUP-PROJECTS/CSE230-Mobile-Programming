@@ -27,12 +27,7 @@ const DATA = [
     id: "3",
     url: "https://pbs.twimg.com/profile_images/1383992823003815936/Aj-yhJb2_400x400.jpg",
     name: "1800-111-747"
-  },
-  {
-    id: "4",
-    url: "https://goop-img.com/wp-content/uploads/2020/03/how-to-help-covid-19-shutterstock_1440974273-1.jpg",
-    name: "022-22027990"
-  },
+  }
  
 ]
 
