@@ -8,37 +8,81 @@ const ViewDetails = ({navigation, route}) => {
   console.log(venues);
 
   if (venues) {
-    return (
-      <View style={{padding: 20,backgroundColor:'F4F8FA'}}>
-        <Text
+    if (venues.venues.centers.length == 0) {
+      return (
+        <View
           style={{
-            padding: 20,
-            textAlign: 'center',
-            fontWeight: 'bold',
-            fontSize: 30,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}>
-          Venues
-        </Text>
-        <ScrollView>
-          {venues.venues.centers.map((center,index) => {
+          <Text
+            style={{
+              textAlign: 'center',
+              fontWeight: 'bold',
+              fontSize: 30,
+              paddingTop: 20,
+            }}>
+            No Venues Available
+          </Text>
+        </View>
+      );
+    }
+    return (
+      <View style={{backgroundColor: '#fff'}}>
+        <ScrollView style={{paddingBottom: 20}}>
+          <Text
+            key={1361}
+            style={{
+              textAlign: 'center',
+              fontWeight: 'bold',
+              fontSize: 30,
+              paddingTop: 20,
+              color: '#369',
+            }}>
+            Venues
+          </Text>
+          {venues.venues.centers.map((center, index) => {
             console.log(center);
 
             return (
               <View style={styles.card} key={index}>
                 <Text style={styles.text}>{center.name}</Text>
                 <Text style={styles.bodyText}>{center.address}</Text>
-               {center.fee_type=="PAID"?<View>
-                 <Text>{center.fee_type}</Text>
-                 <Text>{center.vaccine_fees[fee]}</Text>
-               </View>:<Text></Text>}
-                {center.sessions.map((session,index)=>{
-                  return (
-                    <View>
-                    <Text>{session.vaccine}</Text>
-                    <Text>{session.min_age_limit}</Text>
-                    <Text>{session.available_capacity_dose1}</Text>
-                    <Text>{session.available_capacity_dose2}</Text>
+                <Text style={{color: '#369', fontWeight: 'bold'}}>
+                  Fees Type : {center.fee_type}
+                </Text>
+                {center.fee_type == 'PAID' ? (
+                  <View>
+                    <Text style={{color: '#369', fontWeight: 'bold'}}>
+                      Fees Paid :{center.vaccine_fees[fee]}
+                    </Text>
                   </View>
+                ) : (
+                  <Text></Text>
+                )}
+                {center.sessions.map((session, index) => {
+                  return (
+                    <View style={{paddingVertical: 10}}>
+                      <Text style={{color: '#369'}}>Session : {index + 1}</Text>
+                      <Text style={{color: '#369'}}>
+                        Vaccine : {session.vaccine}
+                      </Text>
+                      <Text style={{color: '#369'}}>
+                        Age Limit : {session.min_age_limit}
+                      </Text>
+                      <Text style={{color: '#369'}}>
+                        Available Capacity : {session.available_capacity}
+                      </Text>
+                      <Text style={{color: '#369'}}>
+                        Available for Dose 1 :{' '}
+                        {session.available_capacity_dose1}
+                      </Text>
+                      <Text style={{color: '#369'}}>
+                        Available for Dose 2 :{' '}
+                        {session.available_capacity_dose2}
+                      </Text>
+                    </View>
                   );
                 })}
               </View>
@@ -54,17 +98,9 @@ const ViewDetails = ({navigation, route}) => {
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor:'F4F8FA'
+          backgroundColor: 'F4F8FA',
         }}>
-        <Spinner
-          visible={loading}
-          // textContent={'Loading...'}
-          // textStyle={{color: colors.text}}
-          // overlayColor={colors.background}
-          // cancelable={false}
-          // color={colors.text}
-          animation="fade"
-        />
+        <Spinner visible={loading} animation="fade" />
       </View>
     );
   }
@@ -77,12 +113,13 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     paddingVertical: 20,
     paddingHorizontal: 20,
-    elevation: 10,
-    width: "80%",
-    alignSelf:'center'
+    elevation: 8,
+    width: '80%',
+    alignSelf: 'center',
+    backgroundColor: '#F0F8FF',
   },
   titleText: {
-    color: 'black',
+    color: '#369',
     fontSize: 18,
   },
   text: {

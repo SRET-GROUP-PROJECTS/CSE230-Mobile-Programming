@@ -51,30 +51,36 @@ const styles = StyleSheet.create({
 
 const Login = ({navigation}) => {
   const [state, setState] = useState({username: '', password: ''});
-  
-  const handleSubmit = () => {
 
-    axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBDYsd7spbSDvdO_eclV8iH_iAqEa1LS4Q", {
-        email: state.username,
-        password: state.password,
-        returnSecureToken:true
-    }).then(res=>{
-      AsyncStorage.setItem('authCredentials', res.data)
-      AsyncStorage.setItem('authState', 'authenticated').then(() => {
-          console.log('Authstate not null');
-      }).catch(err=>{
-        alert(err);
+  const handleSubmit = () => {
+    axios
+      .post(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBDYsd7spbSDvdO_eclV8iH_iAqEa1LS4Q',
+        {
+          email: state.username,
+          password: state.password,
+          returnSecureToken: true,
+        },
+      )
+      .then((res) => {
+        AsyncStorage.setItem('authCredentials', res.data);
+        AsyncStorage.setItem('authState', 'authenticated')
+          .then(() => {
+            console.log('Authstate not null');
+          })
+          .catch((err) => {
+            alert(err);
+          });
+        navigation.reset({
+          key: null,
+          index: 0,
+          routes: [{name: 'Page'}],
+        });
       })
-      navigation.reset({
-        key: null,
-        index: 0,
-        routes: [{name: 'Page'}],
+      .catch((err) => {
+        alert(err);
       });
-  
-    }).catch(err => {
-      alert(err);
-    })
-    
+
     // firebase
     //   .auth()
     //   .signInWithEmailAndPassword(state.username, state.password)

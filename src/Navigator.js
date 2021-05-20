@@ -80,7 +80,15 @@ const DashboardStack = () => {
           };
         }}
       />
-      <Stack.Screen name="viewDetails" component={ViewDetails} />
+      <Stack.Screen
+        name="viewDetails"
+        component={ViewDetails}
+        options={({navigation}) => {
+          return {
+            header: () => <Header navigation={navigation} title="COVAC" />,
+          };
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -103,8 +111,8 @@ const EmergencyStack = () => {
 const PageDrawer = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Dashboard" component={DashboardStack} />
       <Drawer.Screen name="Guide" component={GuideStack} />
+      <Drawer.Screen name="Dashboard" component={DashboardStack} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Emergency" component={EmergencyStack} />
     </Drawer.Navigator>
@@ -131,7 +139,7 @@ export const Navigator = () => {
   if (!loading) {
     return (
       <NavigationContainer>
-        {1 ? (
+        {authState ? (
           <Stack.Navigator screenOptions={{headerShown: false}}>
             <Stack.Screen name="Page" children={PageDrawer} />
             <Stack.Screen name="Auth" component={AuthStack} />

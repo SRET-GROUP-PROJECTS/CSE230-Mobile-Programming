@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     width: '100%',
-    height: 80,
+    height: 70,
     resizeMode: 'cover',
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
@@ -160,16 +160,16 @@ const Home = ({navigation}) => {
           />
           {sliderState ? buttons[0] : buttons[1]}
         </View>
-        <View style={{marginVertical: 20}}>
+        <View style={{marginVertical: 40}}>
           <Text
             style={{
-              color: '#3595e5',
+              color: '#369',
               textAlign: 'center',
               fontSize: 23,
               marginTop: 5,
               paddingHorizontal: 20,
-              fontFamily: 'Roboto',
-              fontWeight: 'bold',
+              fontFamily: 'verdana',
+              fontWeight: '700',
               lineHeight: 30,
             }}>
             Better to wear a mask than a ventilator, better to stay at home than
