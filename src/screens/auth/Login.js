@@ -69,7 +69,7 @@ const Login = ({navigation}) => {
             console.log('Authstate not null');
           })
           .catch((err) => {
-            alert(err);
+            // alert(err);
           });
         navigation.reset({
           key: null,
@@ -78,7 +78,7 @@ const Login = ({navigation}) => {
         });
       })
       .catch((err) => {
-        alert(err);
+        // alert(err);
       });
 
     // firebase

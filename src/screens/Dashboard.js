@@ -84,9 +84,9 @@ const Dashboard = ({navigation}) => {
   const onDateChange = async (date) => {
     let Fdate = moment(date).format('DD-MM-YYYY');
     const venue = await calendarByDistrict(districtId, Fdate);
-    console.log(venue);
+    // console.log(venue);
     setVenue(venue.centers);
-    console.log(Fdate);
+    // console.log(Fdate);
     setDate(Fdate);
     setDatePickerVisibility(false);
     navigation.navigate('viewDetails', {

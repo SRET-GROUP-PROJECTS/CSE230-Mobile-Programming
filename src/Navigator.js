@@ -126,7 +126,7 @@ export const Navigator = () => {
     AsyncStorage.getItem('authState')
       .then((res) => res)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res == 'authenticated') {
           setAuthState(true);
         } else {

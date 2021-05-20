@@ -29,7 +29,7 @@ const ViewDetails = ({navigation, route}) => {
       );
     }
     return (
-      <View style={{backgroundColor: '#fff'}}>
+      <View style={{backgroundColor: '#fff', }}>
         <ScrollView style={{paddingBottom: 20}}>
           <Text
             key={1361}
@@ -43,7 +43,7 @@ const ViewDetails = ({navigation, route}) => {
             Venues
           </Text>
           {venues.venues.centers.map((center, index) => {
-            console.log(center);
+            // console.log(center);
 
             return (
               <View style={styles.card} key={index}>
@@ -63,7 +63,7 @@ const ViewDetails = ({navigation, route}) => {
                 )}
                 {center.sessions.map((session, index) => {
                   return (
-                    <View style={{paddingVertical: 10}}>
+                    <View key={index*20} style  style={{paddingVertical: 10}}>
                       <Text style={{color: '#369'}}>Session : {index + 1}</Text>
                       <Text style={{color: '#369'}}>
                         Vaccine : {session.vaccine}
